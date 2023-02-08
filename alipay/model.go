@@ -2193,3 +2193,107 @@ type Receiver struct {
 	Account string `json:"account"`
 	Memo    string `json:"memo"`
 }
+
+type ComplainQuery struct {
+	ErrorResponse
+	ComplainEventId  string              `json:"complain_event_id"` //支付宝侧投诉单号
+	Status           string              `json:"status"`            //状态
+	TradeAmount      string              `json:"trade_amount"`      //交易金额，单位元
+	TargetId         string              `json:"target_id"`
+	TargetType       string              `json:"target_type"`
+	TradeNo          string              `json:"trade_no"`
+	MerchantOrderNo  string              `json:"merchant_order_no"`
+	GmtCreate        string              `json:"gmt_create"`
+	GmtModified      string              `json:"gmt_modified"`
+	GmtFinished      string              `json:"gmt_finished"`
+	LeafCategoryName string              `json:"leaf_category_name"`
+	ComplainReason   string              `json:"complain_reason"`
+	Content          string              `json:"content"`
+	Images           []string            `json:"images"`
+	PhoneNo          string              `json:"phone_no"`
+	ReplyDetailInfos []*ReplyDetailInfos `json:"reply_detail_infos"`
+}
+type ReplyDetailInfos struct {
+	ReplierName string   `json:"replier_name"`
+	ReplierRole string   `json:"replier_role"`
+	GmtCreate   string   `json:"gmt_create"`
+	Content     string   `json:"content"`
+	Images      []string `json:"images"`
+}
+
+type ComplainQueryResponse struct {
+	Response     *ComplainQuery `json:"alipay_merchant_tradecomplain_query_response"`
+	AlipayCertSn string         `json:"alipay_cert_sn,omitempty"`
+	SignData     string         `json:"sign_data"`
+	Sign         string         `json:"sign"`
+}
+
+//ComplainOrderInfo ===================================
+type ComplainOrderInfo struct {
+	TargetId         string   `json:"target_id"`
+	TargetType       string   `json:"target_type"`
+	ComplainEventId  string   `json:"complain_event_id"`
+	Status           string   `json:"status"`
+	TradeNo          string   `json:"trade_no"`
+	MerchantOrderNo  string   `json:"merchant_order_no"`
+	GmtCreate        string   `json:"gmt_create"`
+	GmtModified      string   `json:"gmt_modified"`
+	GmtFinished      string   `json:"gmt_finished"`
+	LeafCategoryName string   `json:"leaf_category_name"`
+	ComplainReason   string   `json:"complain_reason"`
+	Content          string   `json:"content"`
+	Images           []string `json:"images"`
+	PhoneNo          string   `json:"phone_no"`
+}
+
+type ComplainBatchQuery struct {
+	ErrorResponse
+	PageSize           int                  `json:"page_size"`
+	PageNum            int                  `json:"page_num"`
+	TotalPageNum       int                  `json:"total_page_num"`
+	TotalNum           int                  `json:"total_num"`
+	TradeComplainInfos []*ComplainOrderInfo `json:"trade_complain_infos"`
+}
+
+//ComplainBatchQueryResponse 查询交易投诉列表
+type ComplainBatchQueryResponse struct {
+	Response     *ComplainBatchQuery `json:"alipay_merchant_tradecomplain_batchquery_response"`
+	AlipayCertSn string              `json:"alipay_cert_sn,omitempty"`
+	SignData     string              `json:"sign_data"`
+	Sign         string              `json:"sign"`
+}
+
+type ImageUpload struct {
+	ErrorResponse
+	ImageId string `json:"image_id"`
+}
+type ImageUploadResponse struct {
+	Response     *ImageUpload `json:"alipay_merchant_image_upload_response"`
+	AlipayCertSn string       `json:"alipay_cert_sn,omitempty"`
+	SignData     string       `json:"sign_data"`
+	Sign         string       `json:"sign"`
+}
+
+type ComplainFeedbackSubmitResponse struct {
+	Response     *ResponseError `json:"alipay_merchant_tradecomplain_feedback_submit_response"`
+	AlipayCertSn string         `json:"alipay_cert_sn,omitempty"`
+	SignData     string         `json:"sign_data"`
+	Sign         string         `json:"sign"`
+}
+
+type ComplainReplySubmitResponse struct {
+	Response     *ResponseError `json:"alipay_merchant_tradecomplain_reply_submit_response"`
+	AlipayCertSn string         `json:"alipay_cert_sn,omitempty"`
+	SignData     string         `json:"sign_data"`
+	Sign         string         `json:"sign"`
+}
+
+type ResponseError struct {
+	ErrorResponse
+}
+type ComplainSupplementSubmitResponse struct {
+	Response     *ResponseError `json:"alipay_merchant_tradecomplain_supplement_submit_response"`
+	AlipayCertSn string         `json:"alipay_cert_sn,omitempty"`
+	SignData     string         `json:"sign_data"`
+	Sign         string         `json:"sign"`
+}
